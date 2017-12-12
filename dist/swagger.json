@@ -1,0 +1,516 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Qepr",
+        "description": "",
+        "contact": {
+            "email": "manu.jain@appinventiv.com"
+        },
+        "version": "1.0"
+    },
+    "host": "10.10.10.107",
+    "basePath": "/qepr/api",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/users/login/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login User into system",
+                "description": "Either need to send fb_id or need to send twitter_id or need to email and password",
+                "operationId": "login",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fb_id",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "twitter_id",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "credentials_type",
+                        "in": "formData",
+                        "description": "",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Validate success"
+                    },
+                    "432": {
+                        "description": "Require parameter missing"
+                    },
+                    "439": {
+                        "description": "Facebook Id not registered"
+                    },
+                    "440": {
+                        "description": "Email not registered"
+                    },
+                    "442": {
+                        "description": "User Blocked"
+                    },
+                    "443": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "Username: ",
+                            "Password: "
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/logout/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logout user from system",
+                "description": "",
+                "operationId": "logout",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Uaccesstoken",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout success"
+                    },
+                    "443": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "Username: ",
+                            "Password: "
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/signUp/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Signup user into the system",
+                "description": "",
+                "operationId": "signUp",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "country_code",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fb_id",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "twitter_id",
+                        "in": "formData",
+                        "description": "",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "login success"
+                    },
+                    "432": {
+                        "description": "Require parameter missing"
+                    },
+                    "433": {
+                        "description": "Either Field is empty or length of value is not correct"
+                    },
+                    "443": {
+                        "description": "Unauthorized"
+                    },
+                    "435": {
+                        "description": "Invalid Email"
+                    },
+                    "437": {
+                        "description": "Facebook ID already registered"
+                    },
+                    "438": {
+                        "description": "Email Already registered"
+                    },
+                    "434": {
+                        "description": "Please enter the email address on which you have recieved the Referral Code."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "Username: ",
+                            "Password: "
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/deviceId/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update Device Id and Device Token of user",
+                "description": "",
+                "operationId": "deviceId",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Uaccesstoken",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_type",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_token",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "432": {
+                        "description": "Require parameter missing"
+                    },
+                    "443": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "Username: ",
+                            "Password: "
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/forgotPassword/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Forgot Passsword Email",
+                "description": "",
+                "operationId": "forgotPassword",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "440": {
+                        "description": "Email not registered"
+                    },
+                    "432": {
+                        "description": "Require parameter missing"
+                    },
+                    "433": {
+                        "description": "Either Field is empty or length of value is not correct"
+                    },
+                    "442": {
+                        "description": "User Blocked"
+                    },
+                    "213": {
+                        "description": "Problem in sending Email"
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "Username: ",
+                            "Password: "
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/validateOtp/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Forgot Passsword Validate OTP",
+                "description": "",
+                "operationId": "validateOtp",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "otp",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "432": {
+                        "description": "Require parameter missing"
+                    },
+                    "433": {
+                        "description": "Either Field is empty or length of value is not correct"
+                    },
+                    "444": {
+                        "description": "Invalid OTP"
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "Username: ",
+                            "Password: "
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/forgotChangePassword/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Forgot Change Password",
+                "description": "",
+                "operationId": "forgotChangePassword",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "forgot_token",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "432": {
+                        "description": "Require parameter missing"
+                    },
+                    "433": {
+                        "description": "Either Field is empty or length of value is not correct"
+                    },
+                    "445": {
+                        "description": "Invalid Forgot Token"
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "Username: ",
+                            "Password: "
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/changePassword/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Change Password of User",
+                "description": "",
+                "operationId": "logout",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Uaccesstoken",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "old_password",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "new_password",
+                        "in": "formData",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout success"
+                    },
+                    "443": {
+                        "description": "Unauthorized"
+                    },
+                    "441": {
+                        "description": "Wrong Password"
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": [
+                            "Username: ",
+                            "Password: "
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {},
+    "securityDefinitions": {
+        "basicAuth": {
+            "type": "basic"
+        }
+    }
+}
